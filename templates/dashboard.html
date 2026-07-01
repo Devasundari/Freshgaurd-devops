@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshGuard - Inventory Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🥗 FreshGuard</h1>
+    <p class="subtitle">Food Expiry Monitoring System</p>
+
+    <!-- Add Product Form -->
+
+    <div class="card">
+
+        <h2>Add Product</h2>
+
+        <form action="/add" method="POST">
+
+            <input
+                type="text"
+                name="product"
+                placeholder="Product Name"
+                required
+            >
+
+            <input
+                type="date"
+                name="expiry"
+                required
+            >
+
+            <button type="submit">
+                Add Product
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Inventory Table -->
+
+    <div class="card">
+
+        <div class="header-row">
+            <h2>Inventory</h2>
+
+            <a href="/download">
+                <button class="download-btn">
+                    Download Report
+                </button>
+            </a>
+        </div>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Product</th>
+                    <th>Expiry Date</th>
+                    <th>Days Left</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% if products %}
+
+                {% for item in products %}
+
+                <tr>
+
+                    <td>{{ item.product }}</td>
+
+                    <td>{{ item.expiry }}</td>
+
+                    <td>{{ item.days_left }}</td>
+
+                    <td>
+
+                        {% if item.status == "Expired" %}
+                            <span class="expired">
+                                {{ item.status }}
+                            </span>
+
+                        {% elif item.status == "Expiring Soon" %}
+
+                            <span class="warning">
+                                {{ item.status }}
+                            </span>
+
+                        {% else %}
+
+                            <span class="fresh">
+                                {{ item.status }}
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            {% else %}
+
+                <tr>
+
+                    <td colspan="4" class="empty">
+                        No products available.
+                    </td>
+
+                </tr>
+
+            {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

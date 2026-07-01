@@ -1,0 +1,5 @@
+Product,ExpiryDate,DaysLeft,Status
+Milk,2026-07-05,4,Expiring Soon
+Bread,2026-06-29,-2,Expired
+Eggs,2026-07-02,1,Expiring Soon
+Butter,2026-07-01,0,Expiring Soon
