@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 CSV_FILE = "inventory.csv"
 
-
+<h1>FreshGuard CI/CD Test</h1>
 # Create CSV if it doesn't exist
 def initialize_csv():
     if not os.path.exists(CSV_FILE):
